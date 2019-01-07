@@ -53,19 +53,21 @@ if __name__ == '__main__':
     pc_sum = np.zeros((len(user_ids)), dtype=np.int32)              # to hold sum of playcounts, for all users
          # to hold standard deviation of playcount per artist, for all users
     for i in range(0, len(user_ids)):
-        pc_i = UAM.getrow(i).toarray()                    # get playcount vector for user i
-        idx_nz = np.nonzero(pc_i)                         # indies of non-zero playcounts
-        pc_sum[i] = np.sum(pc_i[idx_nz])
-       
-        #print('User ' + str(i) +    "   Playcount: " + str(pc_sum[i]))
-        #print("USER ID: " + str(user_ids[i]))
         
-        print("Progress: " +     str(  (     (     (i+1)/(len(user_ids))  )  )   ) + "%" )
-        
-        if user_ids[i] in f_users and pc_sum[i] >= 500: #check if current id is among filtered users and if the current user has a playcount higher that 500
-            found.append(str(user_ids[i]))
-        
-        print(" ")
+        if user_ids[i] in f_users:
+            pc_i = UAM.getrow(i).toarray()                    # get playcount vector for user i
+            idx_nz = np.nonzero(pc_i)                         # indies of non-zero playcounts
+            pc_sum[i] = np.sum(pc_i[idx_nz])
+           
+            #print('User ' + str(i) +    "   Playcount: " + str(pc_sum[i]))
+            #print("USER ID: " + str(user_ids[i]))
+            
+            print("Progress: " +     str(  (     (     (i+1)/(len(user_ids))  )  )   ) + "%" )
+            
+            if user_ids[i] in f_users and pc_sum[i] >= 500: #check if current id is among filtered users and if the current user has a playcount higher that 500
+                found.append(str(user_ids[i]))
+            
+            print(" ")
     # Store to file
     with open(STATISTICS_OUTPUT_FILE, 'w') as f:
         for item in found:
