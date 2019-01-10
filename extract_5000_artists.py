@@ -52,7 +52,7 @@ topArtists = pd.DataFrame()
 chunksize = 100000
 #file columns: User-id, artist-id, album-id, track-id, timestamp
 
-
+'''
 onlyOneChunk = False
 for chunk in pd.read_csv('LFM-1b_LEs.txt',index_col=False, chunksize=chunksize, header=None, sep="\t"):
     if onlyOneChunk == True:
@@ -62,8 +62,24 @@ for chunk in pd.read_csv('LFM-1b_LEs.txt',index_col=False, chunksize=chunksize, 
     topArtists = topArtists.append(topArtists_helper)
     onlyOneChunk = False
     
-topArtists.to_csv("top_artists_", sep='\t')
+topArtists = topArtists.drop_duplicates()
+fin2 = pd.DataFrame(topArtists['artist_id'].value_counts())
+fin2.columns = ["counts"]
+fin2 = fin2.reset_index()
+fin2 = fin2.rename(index=str, columns={"index": "Artist_id", "counts": "Counts"})
+    
+fin2.to_csv("top_artists_2", sep='\t')
 print("finished!")
+'''
+
+#sorting the artists according to #of people listening to them:
+
+artists_ranked = pd.read_csv("top_artists_2.csv", sep="\t")
+artists_ranked_2 = artists_ranked.drop(artists_ranked.columns[0], axis=1)
+print(artists_ranked_2)
+artists_ranked_2 = artists_ranked_2.sort_values(by=['Counts'], ascending=False)
+print(artists_ranked_2[:5000])
+artists_ranked_2[:5000].to_csv("5000TopArtistsOfSet.csv", sep='\t')
 
 #todo: drop dupllicates, drop user id, count columns, sort
 
