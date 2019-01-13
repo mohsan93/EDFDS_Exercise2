@@ -21,25 +21,6 @@ def read_data():
     
     return user_subset
 
-##returns a list with the users filtered in age bins
-##first element of the list contains description of the groups
-def get_age_bins():
-    
-    user_subset=read_data()
-    
-    bins=["6-17","18-21","22-25","26-30","31-40","41-50","51-60","61-100"]
-    
-    b6_17=user_subset[user_subset['age'].isin(range(6,18))]
-    b18_21=user_subset[user_subset['age'].isin(range(18,22))]
-    b22_25=user_subset[user_subset['age'].isin(range(22,26))]
-    b26_30=user_subset[user_subset['age'].isin(range(26,31))]
-    b31_40=user_subset[user_subset['age'].isin(range(31,41))]
-    b41_50=user_subset[user_subset['age'].isin(range(41,51))]
-    b51_60=user_subset[user_subset['age'].isin(range(51,61))]
-    b61_100=user_subset[user_subset['age'].isin(range(61,101))]
-    
-    return [bins,b6_17,b18_21,b22_25,b26_30,b31_40,b41_50,b51_60,b61_100]
-
 ##returns a list with the users filtered in nationality bins
 ##first element of the list contains description of the groups
 def get_nationality_bins():
