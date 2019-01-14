@@ -43,106 +43,139 @@ def get_nationality_bins():
     return ret
     
 if __name__ == '__main__':
+    
+    country_bins=get_nationality_bins()
+    country_names=country_bins[0]
+    
+    c_1=country_bins[1]["user_id"].tolist()
+    c_2=country_bins[2]["user_id"].tolist()
+    c_3=country_bins[3]["user_id"].tolist()
+    c_4=country_bins[4]["user_id"].tolist()
+    c_5=country_bins[5]["user_id"].tolist()
+    c_6=country_bins[6]["user_id"].tolist()
+    c_7=country_bins[7]["user_id"].tolist()
+    c_8=country_bins[8]["user_id"].tolist()
+    c_9=country_bins[9]["user_id"].tolist()
+    c_10=country_bins[10]["user_id"].tolist()
+    c_11=country_bins[11]["user_id"].tolist()
+    c_12=country_bins[12]["user_id"].tolist()
+    c_13=country_bins[13]["user_id"].tolist()
+    c_14=country_bins[14]["user_id"].tolist()
+    c_15=country_bins[15]["user_id"].tolist()
+    c_16=country_bins[16]["user_id"].tolist()
+    c_17=country_bins[17]["user_id"].tolist()
+    c_18=country_bins[18]["user_id"].tolist()
+    c_19=country_bins[19]["user_id"].tolist()
+    c_20=country_bins[20]["user_id"].tolist()
+    c_21=country_bins[21]["user_id"].tolist()
+    c_22=country_bins[22]["user_id"].tolist()
+    c_23=country_bins[23]["user_id"].tolist()
+    c_24=country_bins[24]["user_id"].tolist()
+    c_25=country_bins[25]["user_id"].tolist()
+        
+        
+        
+        
 
-    age=get_age_bins()
+#age=get_age_bins()
 
-    b6_17=age[1]["user_id"].tolist()
-    b18_21=age[2]["user_id"].tolist()
-    b22_25=age[3]["user_id"].tolist()
-    b26_30=age[4]["user_id"].tolist()
-    b31_40=age[5]["user_id"].tolist()
-    b41_50=age[6]["user_id"].tolist()
-    b51_60=age[7]["user_id"].tolist()
-    b61_100=age[8]["user_id"].tolist()
-    
-    #user_ids.user_id = user_ids.user_id.astype('int64')
-    
-    
-    
-    #print(user_ids)
-    
-    topArtists_helper = pd.DataFrame() #Empty dataframe to store the users with their corresponding playcount
-    topArtists = pd.DataFrame()
-    
-    top_artists_b6_17=pd.DataFrame()
-    top_artists_b18_21=pd.DataFrame()
-    top_artists_b22_25=pd.DataFrame()
-    top_artists_b26_30=pd.DataFrame()
-    top_artists_b31_40=pd.DataFrame()
-    top_artists_b41_50=pd.DataFrame()
-    top_artists_b51_60=pd.DataFrame()
-    top_artists_b61_100=pd.DataFrame()
-
-    #user_ids = balanced_users[["user_id"]]
-    #user_ids.user_id = user_ids.user_id.astype('int64')
-        
-    #chunksize = 100000
-    chunksize=50000
-    counter=0
-    
-    #onlyOneChunk = True
-    for chunk in pd.read_csv(LE_DATA_PATH,index_col=False, chunksize=chunksize, header=None, sep="\t"):
-        
-        #print(chunk)
-        #chunk.columns = ["user_id","artist_id","album_id","track-id","timestamp"]
-        
-        cols = [2,3,4]
-        chunk.drop(chunk.columns[cols],axis=1,inplace=True)
-        chunk.columns = ["user_id","artist_id"]
-        
-        topArtists_helper = chunk[chunk['user_id'].isin(b6_17)]
-        top_artists_b6_17 = top_artists_b6_17.append(topArtists_helper)
-        
-        topArtists_helper = chunk[chunk['user_id'].isin(b18_21)]
-        top_artists_b18_21 = top_artists_b18_21.append(topArtists_helper)
-        
-        topArtists_helper = chunk[chunk['user_id'].isin(b22_25)]
-        top_artists_b22_25 = top_artists_b22_25.append(topArtists_helper)
-        
-        topArtists_helper = chunk[chunk['user_id'].isin(b26_30)]
-        top_artists_b26_30 = top_artists_b26_30.append(topArtists_helper)
-        
-        topArtists_helper = chunk[chunk['user_id'].isin(b31_40)]
-        top_artists_b31_40 = top_artists_b31_40.append(topArtists_helper)
-        
-        topArtists_helper = chunk[chunk['user_id'].isin(b41_50)]
-        top_artists_b41_50 = top_artists_b41_50.append(topArtists_helper)
-        
-        topArtists_helper = chunk[chunk['user_id'].isin(b51_60)]
-        top_artists_b51_60 = top_artists_b51_60.append(topArtists_helper)
-        
-        topArtists_helper = chunk[chunk['user_id'].isin(b61_100)]
-        top_artists_b61_100 = top_artists_b61_100.append(topArtists_helper)
-        
-        #onlyOneChunk = False
-        #counter=counter+1
-        #if counter == 20:
-        #    break
-        
-    #topArtists = topArtists.drop_duplicates()
-    fin1 = pd.DataFrame(top_artists_b6_17['artist_id'].value_counts())
-    fin2 = pd.DataFrame(top_artists_b18_21['artist_id'].value_counts())
-    fin3 = pd.DataFrame(top_artists_b22_25['artist_id'].value_counts())
-    fin4 = pd.DataFrame(top_artists_b26_30['artist_id'].value_counts())
-    fin5 = pd.DataFrame(top_artists_b31_40['artist_id'].value_counts())
-    fin6 = pd.DataFrame(top_artists_b41_50['artist_id'].value_counts())
-    fin7 = pd.DataFrame(top_artists_b51_60['artist_id'].value_counts())
-    fin8 = pd.DataFrame(top_artists_b61_100['artist_id'].value_counts())
-    #fin2.columns = ["counts"]
-    #fin2 = fin2.reset_index()
-    #fin2 = fin2.rename(index=str, columns={"index": "Artist_id", "counts": "Counts"})
-    #print(topArtists)   
-    #print(fin2)
-    fin1.to_csv("top_artists_b6_17.csv", sep='\t')
-    fin2.to_csv("top_artists_b18_21.csv", sep='\t')
-    fin3.to_csv("top_artists_b22_25.csv", sep='\t')
-    fin4.to_csv("top_artists_b26_30.csv", sep='\t')
-    fin5.to_csv("top_artists_b31_40.csv", sep='\t')
-    fin6.to_csv("top_artists_b41_50.csv", sep='\t')
-    fin7.to_csv("top_artists_b51_60.csv", sep='\t')
-    fin8.to_csv("top_artists_b61_100.csv", sep='\t')
-    
-    print("finished!")
+#    b6_17=age[1]["user_id"].tolist()
+#    b18_21=age[2]["user_id"].tolist()
+#    b22_25=age[3]["user_id"].tolist()
+#    b26_30=age[4]["user_id"].tolist()
+#    b31_40=age[5]["user_id"].tolist()
+#    b41_50=age[6]["user_id"].tolist()
+#    b51_60=age[7]["user_id"].tolist()
+#    b61_100=age[8]["user_id"].tolist()
+#    
+#    #user_ids.user_id = user_ids.user_id.astype('int64')
+#    
+#    
+#    
+#    #print(user_ids)
+#    
+#    topArtists_helper = pd.DataFrame() #Empty dataframe to store the users with their corresponding playcount
+#    topArtists = pd.DataFrame()
+#    
+#    top_artists_b6_17=pd.DataFrame()
+#    top_artists_b18_21=pd.DataFrame()
+#    top_artists_b22_25=pd.DataFrame()
+#    top_artists_b26_30=pd.DataFrame()
+#    top_artists_b31_40=pd.DataFrame()
+#    top_artists_b41_50=pd.DataFrame()
+#    top_artists_b51_60=pd.DataFrame()
+#    top_artists_b61_100=pd.DataFrame()
+#
+#    #user_ids = balanced_users[["user_id"]]
+#    #user_ids.user_id = user_ids.user_id.astype('int64')
+#        
+#    #chunksize = 100000
+#    chunksize=50000
+#    counter=0
+#    
+#    #onlyOneChunk = True
+#    for chunk in pd.read_csv(LE_DATA_PATH,index_col=False, chunksize=chunksize, header=None, sep="\t"):
+#        
+#        #print(chunk)
+#        #chunk.columns = ["user_id","artist_id","album_id","track-id","timestamp"]
+#        
+#        cols = [2,3,4]
+#        chunk.drop(chunk.columns[cols],axis=1,inplace=True)
+#        chunk.columns = ["user_id","artist_id"]
+#        
+#        topArtists_helper = chunk[chunk['user_id'].isin(b6_17)]
+#        top_artists_b6_17 = top_artists_b6_17.append(topArtists_helper)
+#        
+#        topArtists_helper = chunk[chunk['user_id'].isin(b18_21)]
+#        top_artists_b18_21 = top_artists_b18_21.append(topArtists_helper)
+#        
+#        topArtists_helper = chunk[chunk['user_id'].isin(b22_25)]
+#        top_artists_b22_25 = top_artists_b22_25.append(topArtists_helper)
+#        
+#        topArtists_helper = chunk[chunk['user_id'].isin(b26_30)]
+#        top_artists_b26_30 = top_artists_b26_30.append(topArtists_helper)
+#        
+#        topArtists_helper = chunk[chunk['user_id'].isin(b31_40)]
+#        top_artists_b31_40 = top_artists_b31_40.append(topArtists_helper)
+#        
+#        topArtists_helper = chunk[chunk['user_id'].isin(b41_50)]
+#        top_artists_b41_50 = top_artists_b41_50.append(topArtists_helper)
+#        
+#        topArtists_helper = chunk[chunk['user_id'].isin(b51_60)]
+#        top_artists_b51_60 = top_artists_b51_60.append(topArtists_helper)
+#        
+#        topArtists_helper = chunk[chunk['user_id'].isin(b61_100)]
+#        top_artists_b61_100 = top_artists_b61_100.append(topArtists_helper)
+#        
+#        #onlyOneChunk = False
+#        #counter=counter+1
+#        #if counter == 20:
+#        #    break
+#        
+#    #topArtists = topArtists.drop_duplicates()
+#    fin1 = pd.DataFrame(top_artists_b6_17['artist_id'].value_counts())
+#    fin2 = pd.DataFrame(top_artists_b18_21['artist_id'].value_counts())
+#    fin3 = pd.DataFrame(top_artists_b22_25['artist_id'].value_counts())
+#    fin4 = pd.DataFrame(top_artists_b26_30['artist_id'].value_counts())
+#    fin5 = pd.DataFrame(top_artists_b31_40['artist_id'].value_counts())
+#    fin6 = pd.DataFrame(top_artists_b41_50['artist_id'].value_counts())
+#    fin7 = pd.DataFrame(top_artists_b51_60['artist_id'].value_counts())
+#    fin8 = pd.DataFrame(top_artists_b61_100['artist_id'].value_counts())
+#    #fin2.columns = ["counts"]
+#    #fin2 = fin2.reset_index()
+#    #fin2 = fin2.rename(index=str, columns={"index": "Artist_id", "counts": "Counts"})
+#    #print(topArtists)   
+#    #print(fin2)
+#    fin1.to_csv("top_artists_b6_17.csv", sep='\t')
+#    fin2.to_csv("top_artists_b18_21.csv", sep='\t')
+#    fin3.to_csv("top_artists_b22_25.csv", sep='\t')
+#    fin4.to_csv("top_artists_b26_30.csv", sep='\t')
+#    fin5.to_csv("top_artists_b31_40.csv", sep='\t')
+#    fin6.to_csv("top_artists_b41_50.csv", sep='\t')
+#    fin7.to_csv("top_artists_b51_60.csv", sep='\t')
+#    fin8.to_csv("top_artists_b61_100.csv", sep='\t')
+#    
+#    print("finished!")
         
 
     
