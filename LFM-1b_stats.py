@@ -1,5 +1,5 @@
-# Computes several statistics and provides some tools for the LFM-1b dataset of Last.fm listening histories.
-# Author: Markus Schedl
+#Computes several statistics and provides some tools for the LFM-1b dataset of Last.fm listening histories.
+#Author: Markus Schedl
 
 import numpy as np
 import h5py
